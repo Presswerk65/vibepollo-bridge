@@ -33,10 +33,19 @@ class Client(CoordinatorEntity,BinarySensorEntity):
         self.e=e
     @property
     def device_info(self): return {"identifiers":{(DOMAIN,self.e.entry_id)}}
-    @property
-    def is_on(self):
-        d=self.coordinator.data
-        for cl in d.get('clients',{}).get('named_certs',[]):
-            if cl.get('name')==self.name:
-                return cl.get('connected',False)
+@property
+def is_on(self):
+    d = self.coordinator.data
+    if not d:
         return False
+
+    clients = d.get("clients", {}).get("named_certs", [])
+
+    for c in clients:
+        api_name = (c.get("name") or "").strip()
+        my_name = (self.name or "").strip()
+
+        if api_name.lower() == my_name.lower():
+            return c.get("connected", False)
+
+    return False
