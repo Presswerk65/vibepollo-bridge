@@ -1,8 +1,10 @@
 {
   "domain": "vibepollo_bridge",
   "name": "Vibepollo Bridge",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "config_flow": true,
   "requirements": [],
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "documentation": "https://github.com/Presswerk65/vibepollo-bridge",
+  "issue_tracker": "https://github.com/Presswerk65/vibepollo-bridge/issues"
 }
