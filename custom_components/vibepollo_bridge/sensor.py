@@ -15,3 +15,18 @@ class Connections(CoordinatorEntity,SensorEntity):
     def state(self):
         d=self.coordinator.data
         return d['session'].get('activeSessions',0) if d else 0
+
+class CurrentGame(Base, SensorEntity):
+    def __init__(self, c, entry):
+        super().__init__(c, entry)
+        self._attr_name = "Current Game"
+        self._attr_unique_id = f"{entry.entry_id}_game"
+
+    @property
+    def state(self):
+        d = self.coordinator.data
+        if not d:
+            return "none"
+
+        # ✅ EXAKT dein API Feld
+        return d.get("session", {}).get("appName") or "none"
