@@ -1,9 +1,7 @@
 {
   "name": "Vibepollo Bridge",
   "content_in_root": false,
-  "domains": [
-    "sensor",
-    "binary_sensor"
-  ],
-  "homeassistant": "2023.0.0"
+  "domains": ["sensor", "binary_sensor"],
+  "homeassistant": "2023.0.0",
+  "render_readme": true
 }
