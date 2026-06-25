@@ -1,7 +1,7 @@
 {
   "domain": "vibepollo_bridge",
   "name": "Vibepollo Bridge",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "config_flow": true,
   "requirements": [],
   "iot_class": "local_polling"
