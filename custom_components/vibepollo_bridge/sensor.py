@@ -5,7 +5,11 @@ from .const import DOMAIN
 
 async def async_setup_entry(hass, entry, async_add_entities):
     c=hass.data[DOMAIN][entry.entry_id]
-    async_add_entities([Connections(c,entry)],True)
+    async_add_entities([
+        CurrentGame(coord, entry),
+        ActiveConnections(coord, entry)
+    ], True)
+
 
 class Connections(CoordinatorEntity,SensorEntity):
     def __init__(self,c,e): super().__init__(c); self._attr_name='Active Connections'; self._attr_unique_id=f"{e.entry_id}_conn"; self.e=e
