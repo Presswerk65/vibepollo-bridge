@@ -43,6 +43,10 @@ class Client(CoordinatorEntity, BinarySensorEntity):
         self.entry = entry
 
     @property
+    def should_poll(self):
+        return False
+
+    @property
     def device_info(self):
         return {
             "identifiers": {(DOMAIN, self.entry.entry_id)},
@@ -55,9 +59,7 @@ class Client(CoordinatorEntity, BinarySensorEntity):
         if not d:
             return False
 
-        clients = d.get("clients", {}).get("named_certs", [])
-
-        for c in clients:
+        for c in d.get("clients", {}).get("named_certs", []):
             api_name = (c.get("name") or "").strip()
             my_name = (self.name or "").strip()
 
@@ -65,3 +67,4 @@ class Client(CoordinatorEntity, BinarySensorEntity):
                 return c.get("connected", False)
 
         return False
+
