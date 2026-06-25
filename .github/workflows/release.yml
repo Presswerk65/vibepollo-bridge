@@ -36,4 +36,3 @@ jobs:
           tag: v${{ env.VERSION }}
           name: Vibepollo Bridge v${{ env.VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
-``
