@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -13,36 +16,24 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Get version from manifest.json
+      - name: Get version
         id: version
         run: |
           VERSION=$(jq -r '.version' custom_components/vibepollo_bridge/manifest.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
 
-      - name: Check if tag exists
-        run: |
-          git fetch --tags
-          if git rev-parse "v${VERSION}" >/dev/null 2>&1; then
-            echo "Tag already exists, skipping release"
-            exit 1
-          fi
-
-      - name: Create Git Tag
+      - name: Create Tag
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-
           git tag v${VERSION}
           git push origin v${VERSION}
         continue-on-error: true
 
-      - name: Create GitHub Release
+      - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           tag: v${{ env.VERSION }}
           name: Vibepollo Bridge v${{ env.VERSION }}
-          body: |
-            Automated release
-
-            Version: v${{ env.VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
+``
