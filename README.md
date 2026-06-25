@@ -18,3 +18,10 @@ Add this repository to HACS as Custom Repository.
 Copy `custom_components/vibepollo_bridge` into your HA `config` directory.
 
 Restart Home Assistant.
+
+## Configuration in Vibepollo
+Under clients, create a new token with this API endpoints:
+/api/clients/list
+/api/session/status
+
+Enter the token in the Vibepollo-Bridge Setup
